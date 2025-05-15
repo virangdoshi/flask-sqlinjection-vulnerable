@@ -1,6 +1,6 @@
-import random
 from dataclasses import dataclass, field
 from typing import Optional
+import secrets
 
 
 @dataclass
@@ -21,4 +21,4 @@ class Challenge:
 
     def __post_init__(self):
         # We don't care about score, we just want random values
-        self.score = random.randint(0, 10)
+        self.score = secrets.SystemRandom().randint(0, 10)

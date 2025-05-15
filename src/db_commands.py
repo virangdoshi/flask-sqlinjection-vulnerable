@@ -1,7 +1,7 @@
-from random import randint
 
 from db import connection_context
 from models import Challenge, User
+import secrets
 
 CREATE_TABLE_USER = """
 CREATE TABLE IF NOT EXISTS users (
@@ -56,8 +56,7 @@ def start_database():
             """
             cur.execute(insert_cmd)
 
-            challenges_count = randint(
-                MIN_CHALLENGES_PER_USER,
+            challenges_count = secrets.SystemRandom().randint(MIN_CHALLENGES_PER_USER,
                 MAX_CHALLENGES_PER_USER,
             )
             CHAR_A_OFFSET = 65
