@@ -1,5 +1,6 @@
 from flask import Flask
 from rich import print
+import flask
 
 from db import get_challenges_for_candidate
 
@@ -24,7 +25,7 @@ def get_challenges(cpf: str):
 
     disclaimer = f"""
         <p>Here are the challenges I got for candidate:
-            <pre><blockquote>{cpf}</blockquote></pre>
+            <pre><blockquote>{flask.escape(cpf)}</blockquote></pre>
         </p>
     """
     return f"{disclaimer}<br/><h3>Results</h3><ol>{''.join(output)}</ol>"
