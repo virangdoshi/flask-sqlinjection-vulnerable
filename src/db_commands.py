@@ -47,14 +47,14 @@ def start_database():
                 INSERT INTO users (id, email, cpf, birth_date, phone_number)
                 VALUES (
                     {user.id},
-                    '{user.email}',
-                    '{user.cpf}',
-                    '{user.birth_date}',
-                    '{user.phone_number}'
+                    ?,
+                    ?,
+                    ?,
+                    ?
                 )
                 ON CONFLICT DO NOTHING
             """
-            cur.execute(insert_cmd)
+            cur.execute(insert_cmd, (user.email, user.cpf, user.birth_date, user.phone_number, ))
 
             challenges_count = randint(
                 MIN_CHALLENGES_PER_USER,

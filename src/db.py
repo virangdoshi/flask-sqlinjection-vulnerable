@@ -34,18 +34,18 @@ def connection_context():
 
 
 def get_challenges_for_candidate(cpf: str) -> List[Any]:
-    query = f"""
+    query = """
         SELECT title, score FROM challenges c
         JOIN users u
         ON u.id = c.user_id
-        WHERE u.cpf='{cpf}';
+        WHERE u.cpf=?;
     """
     print("-" * 50)
     print(f"[bold]Executing query:[/bold] [green]{query}[/green]")
     print(f"[bold]{'-' * 50}[/bold]")
 
     with connection_context() as cur:
-        cur.execute(query)
+        cur.execute(query, (cpf, ))
         results = cur.fetchall()
 
         return results
